@@ -12,12 +12,15 @@ import java.util.*;
 
 public class VotesLoader {
 
-    List<Vote> votes = new ArrayList<>();
-    HashMap<String, List<Vote>> currentVoteDistribution = new HashMap<>();
-    List<String> headingsEliminated = new ArrayList<>();
+    List<Vote> votes;
+    HashMap<String, List<Vote>> currentVoteDistribution;
+    List<String> headingsEliminated;
     Integer currentDistributionsCompleted = 0;
 
     public VotesLoader(File csv) {
+        votes = new ArrayList<>();
+        currentVoteDistribution = new HashMap<>();
+        headingsEliminated = new ArrayList<>();
         try {
             loadPreferences(csv);
         } catch (IOException | CsvValidationException e) {
@@ -36,8 +39,8 @@ public class VotesLoader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (!input.equalsIgnoreCase("y")) {
-                break;
+            if (!"y".equalsIgnoreCase(input)) {
+                System.exit(0);
             }
             currentDistributionsCompleted++;
         }
@@ -89,10 +92,9 @@ public class VotesLoader {
      * Prints the current vote tally to the console
      */
     private void displayVotes() {
-        HashMap<String, List<Vote>> workingDistribution = new HashMap<>();
         HashMap<String, Integer> piChartData = new HashMap<>();
         //copy the current vote distribution so we can edit it without breaking anything
-        workingDistribution.putAll(currentVoteDistribution);
+        HashMap<String, List<Vote>> workingDistribution = new HashMap<>(currentVoteDistribution);
         while (!workingDistribution.isEmpty()) {
             int highestVotes = -1;
             String highestVotesHeading = "";

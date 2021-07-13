@@ -5,12 +5,14 @@ import org.knowm.xchart.PieChartBuilder;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.style.PieStyler;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class VotePieChart {
 
     HashMap<String, Integer> data;
     Integer distributions;
+    JFrame frame;
 
     public VotePieChart(HashMap<String, Integer> data, Integer distributions) {
         this.data = data;
@@ -22,7 +24,11 @@ public class VotePieChart {
         pieChart.getStyler().setLegendVisible(false);
         pieChart.getStyler().setAnnotationType(PieStyler.AnnotationType.LabelAndPercentage);
         pieChart.getStyler().setAnnotationDistance(1.15);
-        new SwingWrapper(pieChart).displayChart();
+        SwingWrapper wrapper;
+        wrapper = new SwingWrapper(pieChart);
+        wrapper.setTitle(distributions + " distributions");
+        frame = wrapper.displayChart();
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
 }
