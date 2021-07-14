@@ -21,11 +21,11 @@ public class VotePieChart {
         for (String heading : data.keySet()) {
             pieChart.addSeries(heading, data.get(heading));
         }
-        pieChart.getStyler().setLegendVisible(false);
+        pieChart.getStyler().setLegendVisible(true);
         pieChart.getStyler().setAnnotationType(PieStyler.AnnotationType.LabelAndPercentage);
-        pieChart.getStyler().setAnnotationDistance(1.15);
-        SwingWrapper wrapper;
-        wrapper = new SwingWrapper(pieChart);
+        pieChart.getStyler().setAnnotationDistance(.5);
+        SwingWrapper<PieChart> wrapper;
+        wrapper = new SwingWrapper<>(pieChart);
         wrapper.setTitle(distributions + " distributions");
         frame = wrapper.displayChart();
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
