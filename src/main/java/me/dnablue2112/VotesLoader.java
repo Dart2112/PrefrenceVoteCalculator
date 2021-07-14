@@ -95,6 +95,8 @@ public class VotesLoader {
         HashMap<String, Integer> piChartData = new HashMap<>();
         //copy the current vote distribution so we can edit it without breaking anything
         HashMap<String, List<Vote>> workingDistribution = new HashMap<>(currentVoteDistribution);
+        System.out.println("Total Votes: " + votes.size());
+        System.out.println("Distribution #" + currentDistributionsCompleted);
         while (!workingDistribution.isEmpty()) {
             int highestVotes = -1;
             String highestVotesHeading = "";
